@@ -3,32 +3,16 @@
   hosts: all
   become: true
   tasks:
-    - name: Perform the pre-check operations
-      script: files/precheck.sh
-      args:
-        creates: /home/axis/precheck.sh
-
     - name: Applying all the available patches
       dnf:
         name: "*"
         state: latest
+      notify:
+        - reboot_servers
 
-    - name: Rebooting the machines
+  handlers:
+    - name: reboot_servers
       reboot:
         reboot_timeout: 300
         test_command: uptime
 
-    - name: Performing the post-check operations
-      script: files/postcheck.sh
-      args:
-        creates: /home/axis/postcheck.sh
-
-    - name: Finding the pre & post check result files
-      shell: (cd /home/axis; find . -maxdepth 1 -type f -iname "*.txt") | cut -d '/' -f2
-      register: files_to_fetch
-
-    - name: Fetching the result files
-      fetch:
-        src: /home/axis/{{ item }}
-        dest: /home/axis
-      loop: "{{ files_to_fetch.stdout_lines }}"
