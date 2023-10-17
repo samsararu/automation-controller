@@ -1,2 +1,3 @@
 # automation-controller
-for automation controller practice
+
+This is for my Automation Controller Practice Repository!
