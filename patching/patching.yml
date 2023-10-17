@@ -7,6 +7,25 @@
       dnf:
         name: "*"
         state: latest
+      when: ansible_distribution == "RedHat"
+      notify:
+        - reboot_servers
+
+    - block:
+        - name: update apt cache if needed
+          apt:
+            update_cache: yes
+            cache_valid_time: 3600
+
+        - name: update all packages
+          apt:
+            name: "*"
+            state: latest
+
+        - name: upgrade the OS
+          apt:
+            upgrade: dist
+      when: ansible_distribution == "Ubuntu"
       notify:
         - reboot_servers
 
