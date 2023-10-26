@@ -1,6 +1,6 @@
 ---
 - name: remove {{ something }}
-  hosts: all
+  hosts: rhel
   tasks:
     - name: stop {{ something }}
       service:
