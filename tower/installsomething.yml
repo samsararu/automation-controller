@@ -1,6 +1,6 @@
 ---
 - name: install run and enable {{ something }}
-  hosts: all
+  hosts: rhel
   tasks:
     - name: install {{ something }}
       package:
