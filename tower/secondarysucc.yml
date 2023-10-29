@@ -1,0 +1,11 @@
+---
+- name: create directory
+  hosts: ansible1
+  become: true
+  tasks:
+    - name: create directory
+      file:
+        path: /{{ user }}files
+        owner: "{{ user }}"
+        state: directory
+        recurse: yes
