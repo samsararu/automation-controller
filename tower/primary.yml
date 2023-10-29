@@ -1,0 +1,10 @@
+---
+- name: create user with password
+  hosts: ansible1
+  become: true
+  tasks:
+    - name: create {{ user }} with {{ passwd }}
+      user:
+        name: "{{ user }}"
+        password: "{{ passwd }}"
+        update_password: on_create
