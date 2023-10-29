@@ -1,0 +1,7 @@
+---
+- name: print the message
+  hosts: ansible1
+  tasks:
+    - name: print message
+      debug:
+        msg: failed to create user
