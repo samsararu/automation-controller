@@ -1,0 +1,18 @@
+---
+# tasks file for httpd-roles
+- name: Install apache packages
+  dnf:
+    name: httpd
+    state: latest
+
+- name: ensure apache is running
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: copy html page
+  copy:
+    content: 'welcome to this hell'
+    dest: /var/www/html/index.html
+  notify: restart_apache
