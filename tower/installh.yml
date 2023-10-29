@@ -1,0 +1,4 @@
+---
+- hosts: ansible1
+  roles:
+    - role: 'roles/httpd'
